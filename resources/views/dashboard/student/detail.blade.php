@@ -16,19 +16,19 @@
     </tr>
   </thead>
   <tbody>
-    @php 
+    @php
     $no = 1
     @endphp
 
-    <tr>  
+    <tr>
       <td>{{$no++}}</td>
       <td>{{$student->nis}}</td>
       <td>{{$student->nama}}</td>
       <td>{{$student->tanggal_lahir}}</td>
-      <td>{{$student->kelas}}</td>
+      <td>{{$student->kelas->nama}}</td>
       <td>{{$student->alamat}}</td>
       <td>
-        <a href="/students/all" class="btn btn-primary">Kembali</a>
+        <a href="/student/all" class="btn btn-primary">Kembali</a>
       </td>
 
     </tr>

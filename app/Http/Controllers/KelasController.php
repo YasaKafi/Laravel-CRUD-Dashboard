@@ -11,11 +11,26 @@ class KelasController extends Controller
 
     public function index()
     {
+
+
+        return view('kelas.all', [
+            'kelass' => Kelas::all()
+        ]);
+    }
+
+    public function indexd()
+    {
         $kelas = Kelas::all();
 
         return view('kelas', [
             'title' => 'Daftar Kelas',
             'kelas' => $kelas,
+        ]);
+    }
+
+    public function show($id){
+        return view('kelas.detail',[
+            'kelas' => Kelas::find($id)
         ]);
     }
 
@@ -46,4 +61,4 @@ public function store(Request $request)
 }
 
 
-}   
+}

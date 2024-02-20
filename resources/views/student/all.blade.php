@@ -2,6 +2,14 @@
 
 @section('container')
   <h3>Data Siswa</h3>
+  <div class="col-md-3">
+    <form action="/student/all">
+      <div class="input-group  mb-3">
+        <input type="text" class="form-control " placeholder="Search" name="search" value="{{request('search')}}">
+        <button class="btn btn-info  bg-danger" type="submit" id="button-addon2">Search</button>
+      </div>
+    </form>
+    </div>
   @if(session()->has('success'))
   <div class="alert alert-success alert-dismissible fade show" role="alert">
       <strong>{{ session('success') }}</strong>
@@ -9,7 +17,6 @@
   </div>
 @endif
 
-    <a href="/student/create/" class="btn btn-outline-success">Add</a>
   <table class="table">
     <thead>
       <tr>
@@ -21,30 +28,29 @@
       </tr>
     </thead>
     <tbody>
-      @php 
-        $no = 1;
+      @php
+        $no = ($students->currentPage() - 1) * $students->perPage() + 1;
+
       @endphp
 
       @foreach ($students as $student)
-      <tr>  
+      <tr>
         <td>{{$no++}}</td>
         <td>{{$student->nis}}</td>
         <td>{{$student->nama}}</td>
         <td>{{$student->kelas->nama}}</td>
         <td>
           <a href="/student/detail/{{$student->id}}" class="btn btn-primary">Detail</a>
-          <a href="/student/edit/{{$student->id}}" class="btn btn-warning">Edit</a>
-          <form action="/students/delete/{{$student->id}}" method="post" class="d-inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
 
-            @method('delete')
-            @csrf
-            <button class="btn btn-danger">Delete</button>
           </form>
         </td>
       </tr>
       @endforeach
     </tbody>
   </table>
+  <div class="d-flex justify-content-center">
+    {{ $students->links()}}
+  </div>
 
 
 @endsection
